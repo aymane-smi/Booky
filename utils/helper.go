@@ -1,7 +1,9 @@
 package utils
 
-// import "net/http"
+import "net/http"
 
-// func JsonHeader() {
-// 	http.ResponseWriter.Header().Set("Content-Type", "application/json")
-// }
+func JsonWriter(w http.ResponseWriter, status int, payload []byte) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(status)
+	w.Write(payload)
+}

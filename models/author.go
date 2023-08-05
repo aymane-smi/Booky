@@ -1,15 +1,16 @@
 package models
 
 import (
-	"github.com/aymane-smi/api-test/utils"
-	"fmt"
 	"errors"
+	"fmt"
+
+	"github.com/aymane-smi/api-test/utils"
 )
 
-
+//can be used as DTO
 type Author struct{
-	id int
-	full_name string
+	Id int
+	Full_name string
 
 }
 
@@ -21,7 +22,7 @@ func AddAuthor(a Author) (string, error){
 		utils.Log.Error(err.Error())
 		return "", err
 	}
-	if _, err := stmt.Exec(a.full_name); err != nil{
+	if _, err := stmt.Exec(a.Full_name); err != nil{
 		utils.Log.Error(err.Error())
 		return "", err
 	}
@@ -37,7 +38,7 @@ func UpdateAuthor(a Author) (*Author, error){
 		return nil, err
 	}
 
-	if _, err := stmt.Exec(a.full_name, a.id); err != nil{
+	if _, err := stmt.Exec(a.Full_name, a.Id); err != nil{
 		return nil, err
 	}
 
@@ -54,7 +55,7 @@ func GetAuthorById(id int) *Author{
 
 	row := stmt.QueryRow(id)
 	var tmp_author Author
-	if err := row.Scan(&tmp_author.id, &tmp_author.full_name); err != nil{
+	if err := row.Scan(&tmp_author.Id, &tmp_author.Full_name); err != nil{
 		utils.Log.Error(err.Error())
 		return nil
 	}
@@ -63,7 +64,6 @@ func GetAuthorById(id int) *Author{
 }
 
 func DeleteAuthorById(id int) (string, error){
-	utils.InitLogger()
 	db := utils.GetInstance()
 	stmt, err := db.Prepare("DELETE FROM authors WHERE id = $1")
 	if err != nil{

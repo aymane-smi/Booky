@@ -1,8 +1,9 @@
 package utils
 
 import (
-	"go.uber.org/zap"
 	"encoding/json"
+
+	"go.uber.org/zap"
 )
 
 var Log *zap.Logger
@@ -11,8 +12,8 @@ func InitLogger(){
 	rawJSON := []byte(`{
 		"level": "debug",
 		"encoding": "json",
-		"outputPaths": ["stdout", "../logs/api.log"],
-		"errorOutputPaths": ["stderr", "../logs/api.log"],
+		"outputPaths": ["./logs/api.log"],
+		"errorOutputPaths": ["./logs/api.log"],
 		"initialFields": {"foo": "bar"},
 		"encoderConfig": {
 		  "timeKey": "logged at", 

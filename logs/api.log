@@ -1,0 +1,4 @@
+
+{"level":"info","logged at":"2023-08-05T15:03:39.593+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-05T15:04:24.124+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-05T15:08:29.049+0100","message":"logger construction succeeded","foo":"bar"}

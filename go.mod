@@ -9,4 +9,9 @@ require (
 	go.uber.org/zap v1.25.0
 )
 
-require go.uber.org/multierr v1.10.0 // indirect
+require github.com/davecgh/go-spew v1.1.1 // indirect
+
+require (
+	github.com/steinfletcher/apitest v1.5.15
+	go.uber.org/multierr v1.10.0 // indirect
+)

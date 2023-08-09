@@ -6,7 +6,7 @@ import (
 )
 
 func TestGetById(t *testing.T){
-	book := GetBookById("3d9aeb87-98fc-4008-b7fe-35f58a8a3b67")
+	book := GetBookById("21a1e439-baf5-400a-b515-c10ed7ead9b5")
 	if book == nil {
 		t.Errorf("error bookis empty");
 	}

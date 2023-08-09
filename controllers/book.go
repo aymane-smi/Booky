@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"github.com/aymane-smi/api-test/models"
@@ -12,6 +13,8 @@ import (
 func GetBookById(w http.ResponseWriter, r *http.Request){
 
 	vars := mux.Vars(r)
+
+	fmt.Println(vars["id"])
 
 	book := models.GetBookById(vars["id"])
 

@@ -6,12 +6,16 @@ import (
 	"strconv"
 
 	"github.com/aymane-smi/api-test/models"
+	prometheus_book "github.com/aymane-smi/api-test/prometheus"
 	"github.com/aymane-smi/api-test/utils"
 	"github.com/gorilla/mux"
 )
 
 func AddAuthor(w http.ResponseWriter, r *http.Request){
 	var author models.Author
+
+	//increment the request counter each time a user make a request call
+	prometheus_book.TotalRequest.Inc()
 
 	json.NewDecoder(r.Body).Decode(&author)
 
@@ -21,6 +25,8 @@ func AddAuthor(w http.ResponseWriter, r *http.Request){
 		response := map[string]interface{}{
 			"message": "something went wrong",
 		}
+		//increment the error counter each time a user make a request call and raise an error
+		prometheus_book.TotalErros.WithLabelValues("controller", "AddAuthor", "controllers").Inc()
 		jsonResponse, _ := json.Marshal(response)
 		utils.JsonWriter(w, http.StatusInternalServerError, jsonResponse)
 		return
@@ -35,6 +41,9 @@ func AddAuthor(w http.ResponseWriter, r *http.Request){
 func GetAuthorById(w http.ResponseWriter, r *http.Request){
 	vars := mux.Vars(r)
 
+	//increment the request counter each time a user make a request call
+	prometheus_book.TotalRequest.Inc()
+
 	id,_ := strconv.Atoi(vars["id"])
 
 	author := models.GetAuthorById(id)
@@ -43,6 +52,8 @@ func GetAuthorById(w http.ResponseWriter, r *http.Request){
 		response := map[string]interface{}{
 			"message": "invalid author id",
 		}
+		//increment the error counter each time a user make a request call and raise an error
+		prometheus_book.TotalErros.WithLabelValues("controller", "GetAuthorById", "controllers").Inc()
 		jsonResponse, _ := json.Marshal(response)
 		utils.JsonWriter(w, http.StatusNotFound, jsonResponse)
 		return
@@ -58,6 +69,9 @@ func GetAuthorById(w http.ResponseWriter, r *http.Request){
 func UpdateAuthor(w http.ResponseWriter, r *http.Request){
 	var author models.Author
 
+	//increment the request counter each time a user make a request call
+	prometheus_book.TotalRequest.Inc()
+
 	json.NewDecoder(r.Body).Decode(&author)
 
 	a, err := models.UpdateAuthor(author)
@@ -66,6 +80,8 @@ func UpdateAuthor(w http.ResponseWriter, r *http.Request){
 		response := map[string]interface{}{
 			"message": "something went wrong",
 		}
+		//increment the error counter each time a user make a request call and raise an error
+		prometheus_book.TotalErros.WithLabelValues("controller", "UpdateAuthor", "controllers").Inc()
 		jsonResponse, _ := json.Marshal(response)
 		utils.JsonWriter(w, http.StatusInternalServerError, jsonResponse)
 		return
@@ -80,6 +96,9 @@ func UpdateAuthor(w http.ResponseWriter, r *http.Request){
 func DeleteAuthor(w http.ResponseWriter, r *http.Request){
 	vars := mux.Vars(r)
 
+	//increment the request counter each time a user make a request call
+	prometheus_book.TotalRequest.Inc()
+
 	id,_ := strconv.Atoi(vars["id"])
 
 	msg, err := models.DeleteAuthorById(id)
@@ -88,6 +107,8 @@ func DeleteAuthor(w http.ResponseWriter, r *http.Request){
 		response := map[string]interface{}{
 			"message": "invalid author id",
 		}
+		//increment the error counter each time a user make a request call and raise an error
+		prometheus_book.TotalErros.WithLabelValues("controller", "DeleteAuthor", "controllers").Inc()
 		jsonResponse, _ := json.Marshal(response)
 		utils.JsonWriter(w, http.StatusInternalServerError, jsonResponse)
 		return

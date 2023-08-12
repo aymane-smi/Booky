@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/aymane-smi/api-test/models"
+	prometheus_book "github.com/aymane-smi/api-test/prometheus"
 	"github.com/aymane-smi/api-test/utils"
 	"github.com/gorilla/mux"
 )
@@ -13,6 +14,9 @@ func GetBookById(w http.ResponseWriter, r *http.Request){
 
 	vars := mux.Vars(r)
 
+	//increment the request counter each time a user make a request call
+	prometheus_book.TotalRequest.Inc()
+
 
 	book := models.GetBookById(vars["id"])
 
@@ -20,6 +24,8 @@ func GetBookById(w http.ResponseWriter, r *http.Request){
 		response := map[string]interface{}{
 			"message": "invalid book id",
 		}
+		//increment the error counter each time a user make a request call and raise an error
+		prometheus_book.TotalErros.WithLabelValues("controller", "GetBookById", "controllers").Inc()
 		jsonResponse, _ := json.Marshal(response)
 		utils.JsonWriter(w, http.StatusNotFound, jsonResponse)
 		return
@@ -35,6 +41,9 @@ func GetBookById(w http.ResponseWriter, r *http.Request){
 func AddBook(w http.ResponseWriter, r *http.Request){
 	var book models.Book
 
+	//increment the request counter each time a user make a request call
+	prometheus_book.TotalRequest.Inc()
+
 	json.NewDecoder(r.Body).Decode(&book)
 
 	msg, err := models.AddBook(book)
@@ -43,6 +52,8 @@ func AddBook(w http.ResponseWriter, r *http.Request){
 		response := map[string]interface{}{
 			"message": "something went wrong",
 		}
+		//increment the error counter each time a user make a request call and raise an error
+		prometheus_book.TotalErros.WithLabelValues("controller", "AddBook", "controllers").Inc()
 		jsonResponse, _ := json.Marshal(response)
 		utils.JsonWriter(w, http.StatusInternalServerError, jsonResponse)
 		return
@@ -58,6 +69,9 @@ func AddBook(w http.ResponseWriter, r *http.Request){
 func UpdateBook(w http.ResponseWriter, r *http.Request){
 	var book models.Book
 
+	//increment the request counter each time a user make a request call
+	prometheus_book.TotalRequest.Inc()
+
 	json.NewDecoder(r.Body).Decode(&book)
 
 	b, err := models.UpdateBook(book)
@@ -66,6 +80,8 @@ func UpdateBook(w http.ResponseWriter, r *http.Request){
 		response := map[string]interface{}{
 			"message": "something went wrong",
 		}
+		//increment the error counter each time a user make a request call and raise an error
+		prometheus_book.TotalErros.WithLabelValues("controller", "UpdateBook", "controllers").Inc()
 		jsonResponse, _ := json.Marshal(response)
 		utils.JsonWriter(w, http.StatusInternalServerError, jsonResponse)
 		return
@@ -80,12 +96,17 @@ func UpdateBook(w http.ResponseWriter, r *http.Request){
 func DeleteBook(w http.ResponseWriter, r *http.Request){
 	vars := mux.Vars(r)
 
+	//increment the request counter each time a user make a request call
+	prometheus_book.TotalRequest.Inc()
+
 	msg, err := models.DeleteById(vars["id"])
 
 	if err != nil{
 		response := map[string]interface{}{
 			"message": "invalid book id",
 		}
+		//increment the error counter each time a user make a request call and raise an error
+		prometheus_book.TotalErros.WithLabelValues("controller", "DeleteBook", "controllers").Inc()
 		jsonResponse, _ := json.Marshal(response)
 		utils.JsonWriter(w, http.StatusInternalServerError, jsonResponse)
 		return

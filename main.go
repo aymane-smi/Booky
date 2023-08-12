@@ -7,6 +7,7 @@ import (
 	"github.com/aymane-smi/api-test/controllers"
 	"github.com/aymane-smi/api-test/utils"
 	"github.com/gorilla/mux"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 func main(){
@@ -35,7 +36,14 @@ func main(){
 
 	r.HandleFunc("/author/{id}", controllers.DeleteAuthor).Methods("DELETE")
 
+	//prometheus route
+
+	http.Handle("/metrics", promhttp.Handler())
+
+	
+
 	fmt.Println("Start listening to server at port 8000")
 
 	http.ListenAndServe(":8000", r)
+
 }

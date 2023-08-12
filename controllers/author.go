@@ -3,41 +3,19 @@ package controllers
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 
 	"github.com/aymane-smi/api-test/models"
 	"github.com/aymane-smi/api-test/utils"
 	"github.com/gorilla/mux"
 )
 
-func GetBookById(w http.ResponseWriter, r *http.Request){
+func AddAuthor(w http.ResponseWriter, r *http.Request){
+	var author models.Author
 
-	vars := mux.Vars(r)
+	json.NewDecoder(r.Body).Decode(&author)
 
-
-	book := models.GetBookById(vars["id"])
-
-	if book == nil {
-		response := map[string]interface{}{
-			"message": "invalid book id",
-		}
-		jsonResponse, _ := json.Marshal(response)
-		utils.JsonWriter(w, http.StatusNotFound, jsonResponse)
-		return
-	}
-
-	response := map[string]interface{}{
-		"book": book,
-	}
-	jsonResponse, _ := json.Marshal(response)
-	utils.JsonWriter(w, http.StatusOK, jsonResponse)
-}
-
-func AddBook(w http.ResponseWriter, r *http.Request){
-	var book models.Book
-
-	json.NewDecoder(r.Body).Decode(&book)
-
-	msg, err := models.AddBook(book)
+	msg, err := models.AddAuthor(author)
 
 	if err != nil{
 		response := map[string]interface{}{
@@ -52,15 +30,37 @@ func AddBook(w http.ResponseWriter, r *http.Request){
 	}
 	jsonResponse, _ := json.Marshal(response)
 	utils.JsonWriter(w, http.StatusOK, jsonResponse)
-
 }
 
-func UpdateBook(w http.ResponseWriter, r *http.Request){
-	var book models.Book
+func GetAuthorById(w http.ResponseWriter, r *http.Request){
+	vars := mux.Vars(r)
 
-	json.NewDecoder(r.Body).Decode(&book)
+	id,_ := strconv.Atoi(vars["id"])
 
-	b, err := models.UpdateBook(book)
+	author := models.GetAuthorById(id)
+
+	if author == nil {
+		response := map[string]interface{}{
+			"message": "invalid author id",
+		}
+		jsonResponse, _ := json.Marshal(response)
+		utils.JsonWriter(w, http.StatusNotFound, jsonResponse)
+		return
+	}
+
+	response := map[string]interface{}{
+		"author": author,
+	}
+	jsonResponse, _ := json.Marshal(response)
+	utils.JsonWriter(w, http.StatusOK, jsonResponse)
+}
+
+func UpdateAuthor(w http.ResponseWriter, r *http.Request){
+	var author models.Author
+
+	json.NewDecoder(r.Body).Decode(&author)
+
+	a, err := models.UpdateAuthor(author)
 
 	if err != nil{
 		response := map[string]interface{}{
@@ -71,20 +71,22 @@ func UpdateBook(w http.ResponseWriter, r *http.Request){
 		return
 	}
 	response := map[string]interface{}{
-		"book": b,
+		"author": a,
 	}
 	jsonResponse, _ := json.Marshal(response)
 	utils.JsonWriter(w, http.StatusOK, jsonResponse)
 }
 
-func DeleteBook(w http.ResponseWriter, r *http.Request){
+func DeleteAuthor(w http.ResponseWriter, r *http.Request){
 	vars := mux.Vars(r)
 
-	msg, err := models.DeleteById(vars["id"])
+	id,_ := strconv.Atoi(vars["id"])
+
+	msg, err := models.DeleteAuthorById(id)
 
 	if err != nil{
 		response := map[string]interface{}{
-			"message": "invalid book id",
+			"message": "invalid author id",
 		}
 		jsonResponse, _ := json.Marshal(response)
 		utils.JsonWriter(w, http.StatusInternalServerError, jsonResponse)

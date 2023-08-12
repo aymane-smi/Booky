@@ -12,8 +12,8 @@ func InitLogger(){
 	rawJSON := []byte(`{
 		"level": "debug",
 		"encoding": "json",
-		"outputPaths": ["../logs/api.log"],
-		"errorOutputPaths": ["../logs/api.log"],
+		"outputPaths": ["./logs/api.log"],
+		"errorOutputPaths": ["./logs/api.log"],
 		"initialFields": {"foo": "bar"},
 		"encoderConfig": {
 		  "timeKey": "logged at", 

@@ -5,8 +5,10 @@ import (
 	"net/http"
 
 	"github.com/aymane-smi/api-test/controllers"
+	prometheus_book "github.com/aymane-smi/api-test/prometheus"
 	"github.com/aymane-smi/api-test/utils"
 	"github.com/gorilla/mux"
+	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
@@ -36,9 +38,13 @@ func main(){
 
 	r.HandleFunc("/author/{id}", controllers.DeleteAuthor).Methods("DELETE")
 
-	//prometheus route
+	//prometheus route & config
 
-	http.Handle("/metrics", promhttp.Handler())
+	r.Handle("/metrics", promhttp.Handler())
+
+	prometheus.MustRegister(prometheus_book.TotalRequest)
+	prometheus.MustRegister(prometheus_book.TotalErros)
+	prometheus.MustRegister(prometheus_book.RequestDuration)
 
 	
 

@@ -7,3 +7,11 @@
 {"level":"info","logged at":"2023-08-12T12:44:13.748+0100","message":"logger construction succeeded","foo":"bar"}
 {"level":"info","logged at":"2023-08-12T12:52:18.019+0100","message":"logger construction succeeded","foo":"bar"}
 {"level":"info","logged at":"2023-08-12T13:00:01.308+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-12T20:22:24.408+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-12T20:38:55.609+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-13T01:20:49.056+0100","message":"sql: no rows in result set","foo":"bar"}
+{"level":"info","logged at":"2023-08-13T01:21:03.948+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-13T01:21:09.212+0100","message":"sql: no rows in result set","foo":"bar"}
+{"level":"error","logged at":"2023-08-13T01:21:47.011+0100","message":"sql: no rows in result set","foo":"bar"}
+{"level":"info","logged at":"2023-08-13T01:30:23.619+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-13T01:31:00.556+0100","message":"sql: no rows in result set","foo":"bar"}

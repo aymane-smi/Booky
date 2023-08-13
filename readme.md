@@ -2,6 +2,9 @@
 
 ***application created for learning purpose in order to learn about cloud native***
 
+## application architecture overview
+
+![diagram](goapi-v1.png)
 ## api documentation
 
 ### Book api

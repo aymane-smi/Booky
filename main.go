@@ -44,6 +44,7 @@ func main(){
 
 	prometheus.MustRegister(prometheus_book.TotalRequest)
 	prometheus.MustRegister(prometheus_book.TotalErros)
+	prometheus.MustRegister(prometheus_book.RequestDuration)
 
 	
 

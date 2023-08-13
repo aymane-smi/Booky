@@ -16,3 +16,13 @@ var TotalErros = prometheus.NewCounterVec(
 	},
 	[]string{"type", "method", "package"},
 )
+
+var RequestDuration = prometheus.NewHistogram(
+	prometheus.HistogramOpts{
+		Namespace: "request",
+		Subsystem: "book",
+		Name:    "http_request_duration_seconds",
+		Help:    "HTTP request duration distribution",
+		Buckets: []float64{0.1, 0.5, 1, 2, 5, 10},
+	},
+)

@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"net/http"
+	"time"
 
 	"github.com/aymane-smi/api-test/models"
 	prometheus_book "github.com/aymane-smi/api-test/prometheus"
@@ -11,6 +12,9 @@ import (
 )
 
 func GetBookById(w http.ResponseWriter, r *http.Request){
+
+	//timestamp of the handler being called
+	start := time.Now()
 
 	vars := mux.Vars(r)
 
@@ -25,7 +29,7 @@ func GetBookById(w http.ResponseWriter, r *http.Request){
 			"message": "invalid book id",
 		}
 		//increment the error counter each time a user make a request call and raise an error
-		prometheus_book.TotalErros.WithLabelValues("controller", "GetBookById", "controllers").Inc()
+		prometheus_book.TotalErros.WithLabelValues("book", "GetBookById", "controllers").Inc()
 		jsonResponse, _ := json.Marshal(response)
 		utils.JsonWriter(w, http.StatusNotFound, jsonResponse)
 		return
@@ -35,10 +39,16 @@ func GetBookById(w http.ResponseWriter, r *http.Request){
 		"book": book,
 	}
 	jsonResponse, _ := json.Marshal(response)
+	//get the remaining timefrom the start and give it to the histogram
+	duration := time.Since(start).Seconds()
+	prometheus_book.RequestDuration.Observe(duration)
 	utils.JsonWriter(w, http.StatusOK, jsonResponse)
 }
 
 func AddBook(w http.ResponseWriter, r *http.Request){
+	//timestamp of the handler being called
+	start := time.Now()
+
 	var book models.Book
 
 	//increment the request counter each time a user make a request call
@@ -53,7 +63,7 @@ func AddBook(w http.ResponseWriter, r *http.Request){
 			"message": "something went wrong",
 		}
 		//increment the error counter each time a user make a request call and raise an error
-		prometheus_book.TotalErros.WithLabelValues("controller", "AddBook", "controllers").Inc()
+		prometheus_book.TotalErros.WithLabelValues("book", "AddBook", "controllers").Inc()
 		jsonResponse, _ := json.Marshal(response)
 		utils.JsonWriter(w, http.StatusInternalServerError, jsonResponse)
 		return
@@ -62,11 +72,17 @@ func AddBook(w http.ResponseWriter, r *http.Request){
 		"message": msg,
 	}
 	jsonResponse, _ := json.Marshal(response)
+	//get the remaining timefrom the start and give it to the histogram
+	duration := time.Since(start).Seconds()
+	prometheus_book.RequestDuration.Observe(duration)
 	utils.JsonWriter(w, http.StatusOK, jsonResponse)
 
 }
 
 func UpdateBook(w http.ResponseWriter, r *http.Request){
+	//timestamp of the handler being called
+	start := time.Now()
+
 	var book models.Book
 
 	//increment the request counter each time a user make a request call
@@ -81,7 +97,7 @@ func UpdateBook(w http.ResponseWriter, r *http.Request){
 			"message": "something went wrong",
 		}
 		//increment the error counter each time a user make a request call and raise an error
-		prometheus_book.TotalErros.WithLabelValues("controller", "UpdateBook", "controllers").Inc()
+		prometheus_book.TotalErros.WithLabelValues("book", "UpdateBook", "controllers").Inc()
 		jsonResponse, _ := json.Marshal(response)
 		utils.JsonWriter(w, http.StatusInternalServerError, jsonResponse)
 		return
@@ -90,10 +106,15 @@ func UpdateBook(w http.ResponseWriter, r *http.Request){
 		"book": b,
 	}
 	jsonResponse, _ := json.Marshal(response)
+	//get the remaining timefrom the start and give it to the histogram
+	duration := time.Since(start).Seconds()
+	prometheus_book.RequestDuration.Observe(duration)
 	utils.JsonWriter(w, http.StatusOK, jsonResponse)
 }
 
 func DeleteBook(w http.ResponseWriter, r *http.Request){
+	//timestamp of the handler being called
+	start := time.Now()
 	vars := mux.Vars(r)
 
 	//increment the request counter each time a user make a request call
@@ -106,7 +127,7 @@ func DeleteBook(w http.ResponseWriter, r *http.Request){
 			"message": "invalid book id",
 		}
 		//increment the error counter each time a user make a request call and raise an error
-		prometheus_book.TotalErros.WithLabelValues("controller", "DeleteBook", "controllers").Inc()
+		prometheus_book.TotalErros.WithLabelValues("book", "DeleteBook", "controllers").Inc()
 		jsonResponse, _ := json.Marshal(response)
 		utils.JsonWriter(w, http.StatusInternalServerError, jsonResponse)
 		return
@@ -115,5 +136,8 @@ func DeleteBook(w http.ResponseWriter, r *http.Request){
 		"message": msg,
 	}
 	jsonResponse, _ := json.Marshal(response)
+	//get the remaining timefrom the start and give it to the histogram
+	duration := time.Since(start).Seconds()
+	prometheus_book.RequestDuration.Observe(duration)
 	utils.JsonWriter(w, http.StatusOK, jsonResponse)
 }

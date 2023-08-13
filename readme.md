@@ -29,3 +29,15 @@ you can check both `book_test.go` or `author_test.go` for testing or adding more
 ### logging 
 
 for logging system *Booky* uses **Zap** which a fast logger built for go.every logs are stored in ```/logs/api.log``` if you want to change the logging configurations please check ```./utils/log.go```
+
+### monitoring
+
+the monitoring system use **Prometheus** with 3 types of metrics:
+- Counter: which used for determine number of request and errors in the whole application
+- Histogram: used for display request response time
+
+***checkout `/prometheus/prometheus.go` to see the configuration***
+
+#### visualiation:
+ you can use prometheus server(downlaod the binary file or use docker image) or use grafana.
+ for grafana please run docker compose file `docker-compose up -d` and add prometheus as datasource.[you can see the docs](https://prometheus.io/docs/tutorials/visualizing_metrics_using_grafana/)

@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/aymane-smi/api-test/models"
@@ -11,59 +12,24 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func GetBookById(w http.ResponseWriter, r *http.Request){
-
+func AddAuthor(w http.ResponseWriter, r *http.Request){
 	//timestamp of the handler being called
 	start := time.Now()
-
-	vars := mux.Vars(r)
+	var author models.Author
 
 	//increment the request counter each time a user make a request call
 	prometheus_book.TotalRequest.Inc()
 
+	json.NewDecoder(r.Body).Decode(&author)
 
-	book := models.GetBookById(vars["id"])
-
-	if book == nil {
-		response := map[string]interface{}{
-			"message": "invalid book id",
-		}
-		//increment the error counter each time a user make a request call and raise an error
-		prometheus_book.TotalErros.WithLabelValues("book", "GetBookById", "controllers").Inc()
-		jsonResponse, _ := json.Marshal(response)
-		utils.JsonWriter(w, http.StatusNotFound, jsonResponse)
-		return
-	}
-
-	response := map[string]interface{}{
-		"book": book,
-	}
-	jsonResponse, _ := json.Marshal(response)
-	//get the remaining timefrom the start and give it to the histogram
-	duration := time.Since(start).Seconds()
-	prometheus_book.RequestDuration.Observe(duration)
-	utils.JsonWriter(w, http.StatusOK, jsonResponse)
-}
-
-func AddBook(w http.ResponseWriter, r *http.Request){
-	//timestamp of the handler being called
-	start := time.Now()
-
-	var book models.Book
-
-	//increment the request counter each time a user make a request call
-	prometheus_book.TotalRequest.Inc()
-
-	json.NewDecoder(r.Body).Decode(&book)
-
-	msg, err := models.AddBook(book)
+	msg, err := models.AddAuthor(author)
 
 	if err != nil{
 		response := map[string]interface{}{
 			"message": "something went wrong",
 		}
 		//increment the error counter each time a user make a request call and raise an error
-		prometheus_book.TotalErros.WithLabelValues("book", "AddBook", "controllers").Inc()
+		prometheus_book.TotalErros.WithLabelValues("author", "AddAuthor", "controllers").Inc()
 		jsonResponse, _ := json.Marshal(response)
 		utils.JsonWriter(w, http.StatusInternalServerError, jsonResponse)
 		return
@@ -76,34 +42,33 @@ func AddBook(w http.ResponseWriter, r *http.Request){
 	duration := time.Since(start).Seconds()
 	prometheus_book.RequestDuration.Observe(duration)
 	utils.JsonWriter(w, http.StatusOK, jsonResponse)
-
 }
 
-func UpdateBook(w http.ResponseWriter, r *http.Request){
+func GetAuthorById(w http.ResponseWriter, r *http.Request){
 	//timestamp of the handler being called
 	start := time.Now()
-
-	var book models.Book
+	vars := mux.Vars(r)
 
 	//increment the request counter each time a user make a request call
 	prometheus_book.TotalRequest.Inc()
 
-	json.NewDecoder(r.Body).Decode(&book)
+	id,_ := strconv.Atoi(vars["id"])
 
-	b, err := models.UpdateBook(book)
+	author := models.GetAuthorById(id)
 
-	if err != nil{
+	if author == nil {
 		response := map[string]interface{}{
-			"message": "something went wrong",
+			"message": "invalid author id",
 		}
 		//increment the error counter each time a user make a request call and raise an error
-		prometheus_book.TotalErros.WithLabelValues("book", "UpdateBook", "controllers").Inc()
+		prometheus_book.TotalErros.WithLabelValues("author", "GetAuthorById", "controllers").Inc()
 		jsonResponse, _ := json.Marshal(response)
-		utils.JsonWriter(w, http.StatusInternalServerError, jsonResponse)
+		utils.JsonWriter(w, http.StatusNotFound, jsonResponse)
 		return
 	}
+
 	response := map[string]interface{}{
-		"book": b,
+		"author": author,
 	}
 	jsonResponse, _ := json.Marshal(response)
 	//get the remaining timefrom the start and give it to the histogram
@@ -112,22 +77,57 @@ func UpdateBook(w http.ResponseWriter, r *http.Request){
 	utils.JsonWriter(w, http.StatusOK, jsonResponse)
 }
 
-func DeleteBook(w http.ResponseWriter, r *http.Request){
+func UpdateAuthor(w http.ResponseWriter, r *http.Request){
 	//timestamp of the handler being called
 	start := time.Now()
+	var author models.Author
+
+	//increment the request counter each time a user make a request call
+	prometheus_book.TotalRequest.Inc()
+
+	json.NewDecoder(r.Body).Decode(&author)
+
+	a, err := models.UpdateAuthor(author)
+
+	if err != nil{
+		response := map[string]interface{}{
+			"message": "something went wrong",
+		}
+		//increment the error counter each time a user make a request call and raise an error
+		prometheus_book.TotalErros.WithLabelValues("author", "UpdateAuthor", "controllers").Inc()
+		jsonResponse, _ := json.Marshal(response)
+		utils.JsonWriter(w, http.StatusInternalServerError, jsonResponse)
+		return
+	}
+	response := map[string]interface{}{
+		"author": a,
+	}
+	jsonResponse, _ := json.Marshal(response)
+	//get the remaining timefrom the start and give it to the histogram
+	duration := time.Since(start).Seconds()
+	prometheus_book.RequestDuration.Observe(duration)
+	utils.JsonWriter(w, http.StatusOK, jsonResponse)
+}
+
+func DeleteAuthor(w http.ResponseWriter, r *http.Request){
+	//timestamp of the handler being called
+	start := time.Now()
+	
 	vars := mux.Vars(r)
 
 	//increment the request counter each time a user make a request call
 	prometheus_book.TotalRequest.Inc()
 
-	msg, err := models.DeleteById(vars["id"])
+	id,_ := strconv.Atoi(vars["id"])
+
+	msg, err := models.DeleteAuthorById(id)
 
 	if err != nil{
 		response := map[string]interface{}{
-			"message": "invalid book id",
+			"message": "invalid author id",
 		}
 		//increment the error counter each time a user make a request call and raise an error
-		prometheus_book.TotalErros.WithLabelValues("book", "DeleteBook", "controllers").Inc()
+		prometheus_book.TotalErros.WithLabelValues("author", "DeleteAuthor", "controllers").Inc()
 		jsonResponse, _ := json.Marshal(response)
 		utils.JsonWriter(w, http.StatusInternalServerError, jsonResponse)
 		return

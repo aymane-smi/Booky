@@ -1,4 +1,5 @@
-name: application testing
+name: Application Testing
+
 on:
   push:
     tags:
@@ -8,6 +9,7 @@ on:
   pull_request:
     branches:
       - main
+
 jobs:
   test:
     strategy:
@@ -16,12 +18,13 @@ jobs:
         os: [ ubuntu-latest, macos-latest, windows-latest ]
     runs-on: ${{ matrix.os }}
     steps:
-      - name: install go
-      uses: actions/setup-go@v2
-      with:
-        go-version: ${{ matrix.go-version }}
-      - uses: actions/checkout@v2
-      - name: lint with golangci-lint
-      uses: golangci/golangci-lint-action@v2
-      - name: run go test
-      run: go test ./...
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go-version }}
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Lint with golangci-lint
+        uses: golangci/golangci-lint-action@v2
+      - name: Run Go Test
+        run: go test ./...

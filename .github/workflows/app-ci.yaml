@@ -22,15 +22,13 @@ jobs:
         with:
           go-version: ${{ matrix.go-version }}
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Lint with golangci-lint
         uses: golangci/golangci-lint-action@v2
       - name: Run postgres container
         run : | 
                 docker build -t book_db .
-                docker run -d --name book_db -p 5432:5432 book_db
-                docker ps
-                fuser 5432/tcp
+                docker run -d --network host --name book_db -p 5432:5432 book_db
       - name: Wait for PostgreSQL to Be Ready
         run: |
           max_retries=10

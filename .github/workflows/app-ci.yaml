@@ -29,6 +29,7 @@ jobs:
         run : | 
                 docker build -t book_db .
                 docker run -d --name book_db -p 5432:5432 book_db
+                docker ps
       - name: Wait for PostgreSQL to Be Ready
         run: |
           max_retries=10

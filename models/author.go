@@ -30,6 +30,21 @@ func AddAuthor(a Author) (string, error){
 
 }
 
+func AddAuthorTesting(a Author) (string, error){
+	db := utils.GetInstance()
+	stmt, err := db.Prepare("INSERT INTO authors(id, full_name) VALUES(1, $1)")
+	if err != nil{
+		utils.Log.Error(err.Error())
+		return "", err
+	}
+	if _, err := stmt.Exec(a.Full_name); err != nil{
+		utils.Log.Error(err.Error())
+		return "", err
+	}
+	return "new row inserted in authors", nil
+
+}
+
 func UpdateAuthor(a Author) (*Author, error){
 	db := utils.GetInstance()
 	stmt, err := db.Prepare("UPDATE authors SET full_name= $1 WHERE id = $2")
@@ -71,7 +86,7 @@ func DeleteAuthorById(id int) (string, error){
 		utils.Log.Error(err.Error())
 		return "", err
 	}
-	x, err := stmt.Exec(id);
+	x, _ := stmt.Exec(id);
 	rowsAffected, err := x.RowsAffected()
 	if rowsAffected == 0 || err != nil{
 		utils.Log.Error("invalid author id to delete")

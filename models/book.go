@@ -54,6 +54,24 @@ func AddBook(b Book) (string, error){
 
 }
 
+//add a book by passing a book to the function for testing purpose
+
+func AddBookTest(b Book) (string, error){
+	newUUID := "test_id"
+	db := utils.GetInstance()
+	stmt, err := db.Prepare("INSERT INTO books(id, isbf, title, page, author_id) VALUES($1, $2, $3, $4, $5)")
+	if err != nil{
+		utils.Log.Error(err.Error())
+		return "", err
+	}
+	if _, err := stmt.Exec(newUUID, b.ISBF, b.Title, b.Page, b.Author); err != nil{
+		utils.Log.Error(err.Error())
+		return "", err
+	}
+	return "new row inserted in books", nil
+
+}
+
 //update a book by passing new tems to change in the records
 
 func UpdateBook(b Book) (*Book, error){

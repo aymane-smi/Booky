@@ -15,3 +15,46 @@
 {"level":"error","logged at":"2023-08-13T01:21:47.011+0100","message":"sql: no rows in result set","foo":"bar"}
 {"level":"info","logged at":"2023-08-13T01:30:23.619+0100","message":"logger construction succeeded","foo":"bar"}
 {"level":"error","logged at":"2023-08-13T01:31:00.556+0100","message":"sql: no rows in result set","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T11:44:11.865+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T16:54:36.520+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-21T16:54:36.551+0100","message":"pq: insert or update on table \"books\" violates foreign key constraint \"books_author_id_fkey\"","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T16:59:45.522+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T17:00:17.387+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T18:35:13.448+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-21T18:35:13.501+0100","message":"sql: no rows in result set","foo":"bar"}
+{"level":"error","logged at":"2023-08-21T18:35:13.511+0100","message":"invalid author id to delete","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T18:35:13.511+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-21T18:35:13.536+0100","message":"sql: no rows in result set","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T18:35:13.536+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T18:35:13.572+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-21T18:35:13.600+0100","message":"sql: no rows in result set","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T18:36:49.961+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-21T18:36:50.186+0100","message":"sql: no rows in result set","foo":"bar"}
+{"level":"error","logged at":"2023-08-21T18:36:50.193+0100","message":"invalid author id to delete","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T18:36:50.193+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-21T18:36:50.221+0100","message":"sql: no rows in result set","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T18:36:50.221+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-21T18:36:50.249+0100","message":"pq: insert or update on table \"books\" violates foreign key constraint \"books_author_id_fkey\"","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T18:36:50.250+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-21T18:36:50.287+0100","message":"sql: no rows in result set","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T18:39:28.055+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T18:39:28.312+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-21T18:39:28.340+0100","message":"sql: no rows in result set","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T18:39:28.341+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-21T18:39:28.368+0100","message":"pq: insert or update on table \"books\" violates foreign key constraint \"books_author_id_fkey\"","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T18:39:28.369+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-21T18:39:28.404+0100","message":"sql: no rows in result set","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T18:44:29.469+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T18:45:16.635+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-21T18:45:16.663+0100","message":"pq: insert or update on table \"books\" violates foreign key constraint \"books_author_id_fkey\"","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T19:00:07.203+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T19:00:48.222+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-21T19:00:48.250+0100","message":"pq: insert or update on table \"books\" violates foreign key constraint \"books_author_id_fkey\"","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T19:01:04.998+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T19:01:39.122+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T19:01:39.336+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T19:02:26.263+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T19:02:26.477+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T19:02:26.556+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T19:02:26.581+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-21T19:02:26.616+0100","message":"logger construction succeeded","foo":"bar"}

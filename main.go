@@ -50,6 +50,6 @@ func main(){
 
 	fmt.Println("Start listening to server at port 8000")
 
-	http.ListenAndServe(":8000", r)
+	_ = http.ListenAndServe(":8000", r)
 
 }

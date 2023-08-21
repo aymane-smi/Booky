@@ -54,7 +54,7 @@ func AddBook(w http.ResponseWriter, r *http.Request){
 	//increment the request counter each time a user make a request call
 	prometheus_book.TotalRequest.Inc()
 
-	json.NewDecoder(r.Body).Decode(&book)
+	_ = json.NewDecoder(r.Body).Decode(&book)
 
 	msg, err := models.AddBook(book)
 
@@ -88,7 +88,7 @@ func UpdateBook(w http.ResponseWriter, r *http.Request){
 	//increment the request counter each time a user make a request call
 	prometheus_book.TotalRequest.Inc()
 
-	json.NewDecoder(r.Body).Decode(&book)
+	_ = json.NewDecoder(r.Body).Decode(&book)
 
 	b, err := models.UpdateBook(book)
 

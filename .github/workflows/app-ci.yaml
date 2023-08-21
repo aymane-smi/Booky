@@ -29,6 +29,19 @@ jobs:
         run : | 
                 docker build -t book_db .
                 docker run -d --name book_db -p 5432:5432 book_db
+      - name: Wait for PostgreSQL to Be Ready
+        run: |
+          max_retries=10
+          retries=0
+          until docker exec book_db psql -h localhost -U postgres -d book_go -c '\q'; do
+            retries=$((retries+1))
+            if [ $retries -ge $max_retries ]; then
+              echo "PostgreSQL not ready after $max_retries retries"
+              exit 1
+            fi
+            echo "Waiting for PostgreSQL to be ready..."
+            sleep 5
+          done
       - name: Migarte table defintion
         run : sudo docker exec -i book_db psql -h localhost -U aymane book_go -a -f book_go.sql
       - name: Install Dependency

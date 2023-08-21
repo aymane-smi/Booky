@@ -16,6 +16,21 @@ jobs:
       matrix:
         go-version: [ 1.17.x, 1.18.x, 1.19.x ]
     runs-on: ubuntu-latest
+    services:
+      book_db:
+        image: postgres
+        env:
+          POSTGRES_USER: aymane
+          POSTGRES_DB: book_go
+          POSTGRES_PASSWORD: aymane@123
+        ports:
+          - 5432:5432
+        # Health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - name: Install Go
         uses: actions/setup-go@v2
@@ -25,11 +40,11 @@ jobs:
         uses: actions/checkout@v3
       - name: Lint with golangci-lint
         uses: golangci/golangci-lint-action@v2
-      - name: Run postgres container
-        run : | 
-                docker build -t book_db .
-                docker run -d --network host --name book_db -p 5432:5432 book_db
-                docker ps
+      # - name: Run postgres container
+      #   run : | 
+      #           docker build -t book_db .
+      #           docker run -d --network host --name book_db -p 5432:5432 book_db
+      #           docker ps
       - name: Wait for PostgreSQL to Be Ready
         run: |
           max_retries=10

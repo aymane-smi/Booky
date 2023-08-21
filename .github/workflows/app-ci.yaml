@@ -36,6 +36,7 @@ jobs:
           retries=0
           until docker exec book_db psql -h 0.0.0.0 -U postgres -d book_go -c '\q'; do
             retries=$((retries+1))
+            docker ps
             if [ $retries -ge $max_retries ]; then
               echo "PostgreSQL not ready after $max_retries retries"
               exit 1

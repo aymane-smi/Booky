@@ -32,7 +32,7 @@ func TestAddAuthorTesting(t *testing.T){
 
 func TestUpdateAuthor(t *testing.T){
 	tmp := Author{
-		Id: 14,
+		Id: 1,
 		Full_name: "test* test*",
 	}
 
@@ -42,13 +42,13 @@ func TestUpdateAuthor(t *testing.T){
 }
 
 func TestGetAuthorById(t *testing.T){
-	if author := GetAuthorById(14); author == nil{
+	if author := GetAuthorById(1); author == nil{
 		t.Errorf("invalid id")
 	}
 }
 
 func TestDeleteAuthorById(t *testing.T){
-	if msg, err := DeleteAuthorById(15); msg == "" && err != nil{
+	if msg, err := DeleteAuthorById(2); msg == "" && err != nil{
 		t.Errorf("%v", err)
 	}
 }

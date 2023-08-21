@@ -21,7 +21,7 @@ func TestAddBook(t *testing.T){
 		ISBF: "test",
 		Title: "test title",
 		Page: 24,
-		Author: 14,
+		Author: 1,
 	}
 	message, err := AddBook(tmp)
 
@@ -30,20 +30,20 @@ func TestAddBook(t *testing.T){
 	}
 }
 
-// func TestAddBookTesting(t *testing.T){
-// 	utils.InitLogger()
-// 	tmp := Book{
-// 		ISBF: "test",
-// 		Title: "test title",
-// 		Page: 24,
-// 		Author: 14,
-// 	}
-// 	message, err := AddBookTest(tmp)
+func TestAddBookTesting(t *testing.T){
+	utils.InitLogger()
+	tmp := Book{
+		ISBF: "test",
+		Title: "test title",
+		Page: 24,
+		Author: 1,
+	}
+	message, err := AddBookTest(tmp)
 
-// 	if message == "" && err != nil {
-// 		t.Errorf("%v", err)
-// 	}
-// }
+	if message == "" && err != nil {
+		t.Errorf("%v", err)
+	}
+}
 
 func TestUpdateBook(t *testing.T){
 	utils.InitLogger()

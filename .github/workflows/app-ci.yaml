@@ -19,9 +19,6 @@ jobs:
     services:
       book_db:
         image: postgres
-        build:
-          context: .
-          dockerfile: Dockerfile
         env:
           POSTGRES_USER: aymane
           POSTGRES_DB: book_go

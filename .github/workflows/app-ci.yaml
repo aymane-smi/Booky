@@ -77,19 +77,16 @@ jobs:
                   -f tag_name=${{ env.RELEASE_VERSION }} \
                   > tmp-release-notes.json
         - name: gzip the bins
-          env:
-            OUT_BASE: ./bin/${{ env.RELEASE_VERSION }}
           run: |
-                  tar -czvf "${OUT_BASE}/linux/amd64/booky_linux_amd64.tar.gz" -C "${OUT_BASE}" linux/amd64/booky
-                  tar -czvf "${OUT_BASE}/linux/arm64/booky_linux_arm64.tar.gz" -C "${OUT_BASE}" linux/arm64/booky
+                  tar -czvf "booky_linux_amd64.tar.gz" -C "./" booky
+                  tar -czvf "booky_linux_arm64.tar.gz" -C "./" booky
         - name: create release
           env:
-            OUT_BASE: ./bin/${{ env.RELEASE_VERSION }}
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           run: |
                   jq -r .body tmp-release-notes.json > tmp-release-notes.md
                   gh release create ${{ env.RELEASE_VERSION }} \
                     -t "$(jq -r .name tmp-release-notes.json)" \
                     -F tmp-release-notes.md \
-                    "${OUT_BASE}/linux/amd64/booky_linux_amd64.tar.gz#booky_linux_amd64" \
-                    "${OUT_BASE}/linux/arm64/booky_linux_arm64.tar.gz#booky_linux_arm64"
+                    "booky_linux_amd64.tar.gz#booky_linux_amd64" \
+                    "booky_linux_arm64.tar.gz#booky_linux_arm64"

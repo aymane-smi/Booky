@@ -67,8 +67,9 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           run: |
-                  gh api -X POST 'repos/aymane-smi/booky/releases/generate-notes'
+                  gh api -X POST '/repos/aymane-smi/booky/releases/generate-note'
                   \
+                  -H "Accept: application/vnd.github+json" \
                   -F commitish=${{ env.RELEASE_VERSION }} \
                   -F tag_name=${{ env.RELEASE_VERSION }} \
                   > tmp-release-notes.json

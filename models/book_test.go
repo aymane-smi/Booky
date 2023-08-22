@@ -1,18 +1,13 @@
 package models
 
 import (
-	"fmt"
 	"testing"
+
+	"github.com/aymane-smi/api-test/utils"
 )
 
-func TestGetById(t *testing.T){
-	book := GetBookById("21a1e439-baf5-400a-b515-c10ed7ead9b5")
-	if book == nil {
-		t.Errorf("error bookis empty");
-	}
-}
-
 func TestAddBook(t *testing.T){
+	utils.InitLogger()
 	tmp := Book{
 		ISBF: "test",
 		Title: "test title",
@@ -26,25 +21,48 @@ func TestAddBook(t *testing.T){
 	}
 }
 
+func TestAddBookTesting(t *testing.T){
+	utils.InitLogger()
+	tmp := Book{
+		ISBF: "test",
+		Title: "test title",
+		Page: 24,
+		Author: 1,
+	}
+	message, err := AddBookTest(tmp)
+
+	if message == "" && err != nil {
+		t.Errorf("%v", err)
+	}
+}
+
 func TestUpdateBook(t *testing.T){
-	book := GetBookById("3d9aeb87-98fc-4008-b7fe-35f58a8a3b67")
+	utils.InitLogger()
+	book := GetBookById("test_id")
 
 	if book == nil{
 		t.Errorf("invalid book in the records")
+	}else{
+		book.Title = "test*"
+		book.ISBF = "test*"
+		book.Page = 101
+
+		if book, err := UpdateBook(*book); book == nil && err != nil{
+			t.Errorf("%v",err)
+		}
 	}
+}
 
-	book.Title = "test*"
-	book.ISBF = "test*"
-	book.Page = 101
-
-	fmt.Println(book)
-	if book, err := UpdateBook(*book); book == nil && err != nil{
-		t.Errorf("%v",err)
+func TestGetById(t *testing.T){
+	utils.InitLogger()
+	book := GetBookById("test_id")
+	if book == nil {
+		t.Errorf("error bookis empty");
 	}
 }
 
 func TestDeleteById(t *testing.T){
-	if msg, err := DeleteById("3d9aeb87-98fc-4008-b7fe-35f58a8a3b67"); msg == "" && err != nil{
+	if msg, err := DeleteById("test_id"); msg == "" && err != nil{
 		t.Errorf("error while deleting the book")
 	}
 }

@@ -1,0 +1,49 @@
+name: Application Testing
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.*'
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        go-version: [ 1.17.x, 1.18.x, 1.19.x ]
+    runs-on: ubuntu-latest
+    services:
+      book_db:
+        image: postgres
+        env:
+          POSTGRES_USER: aymane
+          POSTGRES_DB: book_go
+          POSTGRES_PASSWORD: aymane@123
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go-version }}
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Lint with golangci-lint
+        uses: golangci/golangci-lint-action@v2
+      - name: Install Dependency
+        run: go mod download
+      - name: Run migrations
+        run: |
+                export PGPASSWORD=aymane@123
+                psql -h localhost -U aymane -a -f book_go.sql book_go
+      - name: Run Go Test with excluding controllers package
+        run: go test $(go list ./... | grep -v /controllers)

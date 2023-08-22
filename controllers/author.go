@@ -20,7 +20,7 @@ func AddAuthor(w http.ResponseWriter, r *http.Request){
 	//increment the request counter each time a user make a request call
 	prometheus_book.TotalRequest.Inc()
 
-	json.NewDecoder(r.Body).Decode(&author)
+	_ = json.NewDecoder(r.Body).Decode(&author)
 
 	msg, err := models.AddAuthor(author)
 
@@ -85,7 +85,7 @@ func UpdateAuthor(w http.ResponseWriter, r *http.Request){
 	//increment the request counter each time a user make a request call
 	prometheus_book.TotalRequest.Inc()
 
-	json.NewDecoder(r.Body).Decode(&author)
+	_ = json.NewDecoder(r.Body).Decode(&author)
 
 	a, err := models.UpdateAuthor(author)
 

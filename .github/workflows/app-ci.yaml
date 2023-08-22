@@ -60,5 +60,7 @@ jobs:
       #   run: sudo docker exec -i book_db psql -h localhost -U aymane book_go -a -f book_go.sql
       - name: Install Dependency
         run: go mod download
+      - name: Run migrations
+        run: psql -f book_go.sql postgresql://aymane:aymane@123@localhost:5432/book_go
       - name: Run Go Test with excluding controllers package
         run: go test $(go list ./... | grep -v /controllers)

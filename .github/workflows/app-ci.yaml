@@ -72,7 +72,7 @@ jobs:
                   -H "Accept: application/vnd.github+json" \
                   -H "X-GitHub-Api-Version: 2022-11-28" \
                   /repos/aymane-smi/booky/releases/generate-notes \
-                  -f configuration_file_path='.github/release.yml' 
+                  -f configuration_file_path='.github/release.yml' \
                   -f commitish=${{ env.RELEASE_VERSION }} \
                   -f tag_name=${{ env.RELEASE_VERSION }} \
                   > tmp-release-notes.json

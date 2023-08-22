@@ -1,19 +1,10 @@
 package models
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/aymane-smi/api-test/utils"
 )
-
-func TestGetById(t *testing.T){
-	utils.InitLogger()
-	book := GetBookById("test_id")
-	if book == nil {
-		t.Errorf("error bookis empty");
-	}
-}
 
 func TestAddBook(t *testing.T){
 	utils.InitLogger()
@@ -56,10 +47,17 @@ func TestUpdateBook(t *testing.T){
 		book.ISBF = "test*"
 		book.Page = 101
 
-		fmt.Println(book)
 		if book, err := UpdateBook(*book); book == nil && err != nil{
 			t.Errorf("%v",err)
 		}
+	}
+}
+
+func TestGetById(t *testing.T){
+	utils.InitLogger()
+	book := GetBookById("test_id")
+	if book == nil {
+		t.Errorf("error bookis empty");
 	}
 }
 

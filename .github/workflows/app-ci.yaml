@@ -58,6 +58,8 @@ jobs:
       - name: Install Dependency
         run: go mod download
       - name: Run migrations
-        run: psql -h localhost -U aymane -a -f book_go.sql book_go
+        run: |
+                export PGPASSWORD=aymane@123
+                psql -h localhost -U aymane -a -f book_go.sql book_go
       - name: Run Go Test with excluding controllers package
         run: go test $(go list ./... | grep -v /controllers)

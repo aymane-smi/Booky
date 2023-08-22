@@ -49,6 +49,7 @@ jobs:
         run: go test $(go list ./... | grep -v /controllers)
   release:
       needs: test
+      permissions: write-all
       if: startsWith(github.ref, 'refs/tags/v')
       runs-on: ubuntu-latest
       steps:

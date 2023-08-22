@@ -39,22 +39,6 @@ jobs:
         uses: actions/checkout@v2
       - name: Lint with golangci-lint
         uses: golangci/golangci-lint-action@v2
-      # - name: Wait for PostgreSQL to Be Ready
-      #   run: |
-      #     max_retries=10
-      #     retries=0
-      #     until docker exec book_db psql -h localhost -U postgres -d book_go -c '\q'; do
-      #       retries=$((retries+1))
-      #       docker ps
-      #       if [ $retries -ge $max_retries ]; then
-      #         echo "PostgreSQL not ready after $max_retries retries"
-      #         exit 1
-      #       fi
-      #       echo "Waiting for PostgreSQL to be ready..."
-      #       sleep 5
-      #     done
-      # - name: Migarte table defintion
-      #   run: sudo docker exec -i book_db psql -h localhost -U aymane book_go -a -f book_go.sql
       - name: Install Dependency
         run: go mod download
       - name: Run migrations

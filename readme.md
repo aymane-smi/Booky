@@ -44,3 +44,8 @@ the monitoring system use **Prometheus** with 3 types of metrics:
 #### visualiation:
  you can use prometheus server(downlaod the binary file or use docker image) or use grafana.
  for grafana please run docker compose file `docker-compose up -d` and add prometheus as datasource.[you can see the docs](https://prometheus.io/docs/tutorials/visualizing_metrics_using_grafana/)
+
+ ### Testing
+
+ in order to make the logger work for both testing and other environment we can change ``WORK_MODE`` in `.env` file to be ```DEV``` or ```TEST``` in the following destination :
+- `/models/.env`

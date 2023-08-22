@@ -70,6 +70,7 @@ jobs:
                   gh api -X POST '/repos/aymane-smi/booky/releases/generate-note'
                   \
                   -H "Accept: application/vnd.github+json" \
+                  -H "X-GitHub-Api-Version: 2022-11-28" \
                   -F commitish=${{ env.RELEASE_VERSION }} \
                   -F tag_name=${{ env.RELEASE_VERSION }} \
                   > tmp-release-notes.json

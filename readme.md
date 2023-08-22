@@ -2,6 +2,9 @@
 
 ***application created for learning purpose in order to learn about cloud native***
 
+![workflow for master](https://github.com/aymane-smi/booky/actions/workflows/app-ci.yaml/badge.svg?branch=master) ![tags](https://img.shields.io/github/v/tag/aymane-smi/booky) ![GitHub release (with filter)](https://img.shields.io/github/v/release/aymane-smi/booky)
+
+
 ## application architecture overview
 
 ![diagram](goapi-v1.png)
@@ -49,3 +52,4 @@ the monitoring system use **Prometheus** with 3 types of metrics:
 
  in order to make the logger work for both testing and other environment we can change ``WORK_MODE`` in `.env` file to be ```DEV``` or ```TEST``` in the following destination :
 - `/models/.env`
+- `/.env`

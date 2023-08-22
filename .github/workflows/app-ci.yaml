@@ -80,8 +80,8 @@ jobs:
           env:
             OUT_BASE: ./bin/${{ env.RELEASE_VERSION }}
           run: |
-                  tar -czvf "${OUT_BASE}/linux/amd64/booky_linux_amd64.tar.gz" -C "${OUT_BASE}/linux/amd64" booky
-                  tar -czvf "${OUT_BASE}/linux/arm64/booky_linux_arm64.tar.gz" -C "${OUT_BASE}/linux/arm64" booky
+                  tar -czvf "${OUT_BASE}/linux/amd64/booky_linux_amd64.tar.gz" -C "${OUT_BASE}" linux/amd64/booky
+                  tar -czvf "${OUT_BASE}/linux/arm64/booky_linux_arm64.tar.gz" -C "${OUT_BASE}" linux/arm64/booky
         - name: create release
           env:
             OUT_BASE: ./bin/${{ env.RELEASE_VERSION }}

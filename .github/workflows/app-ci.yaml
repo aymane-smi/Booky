@@ -107,16 +107,14 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASS }}
-      - name: Extract Metadata
-        uses: docker/metadata-action@v4
-        with:
-          images: aymanebel/booky
-          tags: 
-              type=semver,pattern={{version}}
+      # - name: Extract Metadata
+      #   uses: docker/metadata-action@v4
+      #   with:
+      #     images: aymanebel/booky
+      #     tags: 
+      #         type=semver,pattern={{version}}
       - name: build and push
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: |
-            aymane-smi/booky:${{ steps.retrieve-tag.outputs.tag }}
-            aymane-smi/booky:latest
+          tags: aymane-smi/booky:latest

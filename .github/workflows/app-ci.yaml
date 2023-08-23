@@ -118,5 +118,5 @@ jobs:
         with:
           push: true
           tags: |
-            aymane-smi/booky:${{ steps.meta.outputs.tags }}
+            aymane-smi/booky:${{ steps.retrieve-tag.outputs.tag }}
             aymane-smi/booky:latest

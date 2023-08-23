@@ -58,3 +58,23 @@
 {"level":"info","logged at":"2023-08-21T19:02:26.556+0100","message":"logger construction succeeded","foo":"bar"}
 {"level":"info","logged at":"2023-08-21T19:02:26.581+0100","message":"logger construction succeeded","foo":"bar"}
 {"level":"info","logged at":"2023-08-21T19:02:26.616+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-22T15:51:58.510+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-22T16:56:57.679+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-22T16:56:57.714+0100","message":"pq: password authentication failed for user \"aymane\"","foo":"bar"}
+{"level":"info","logged at":"2023-08-22T17:02:51.956+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"info","logged at":"2023-08-22T17:03:45.970+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-22T17:03:45.998+0100","message":"pq: password authentication failed for user \"aymane\"","foo":"bar"}
+{"level":"info","logged at":"2023-08-22T17:03:45.998+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-22T17:03:46.021+0100","message":"pq: password authentication failed for user \"aymane\"","foo":"bar"}
+{"level":"error","logged at":"2023-08-22T17:03:46.026+0100","message":"pq: password authentication failed for user \"aymane\"","foo":"bar"}
+{"level":"error","logged at":"2023-08-22T17:03:46.030+0100","message":"pq: password authentication failed for user \"aymane\"","foo":"bar"}
+{"level":"error","logged at":"2023-08-22T17:03:46.035+0100","message":"pq: password authentication failed for user \"aymane\"","foo":"bar"}
+{"level":"info","logged at":"2023-08-22T17:03:46.035+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-22T17:03:46.058+0100","message":"pq: password authentication failed for user \"aymane\"","foo":"bar"}
+{"level":"info","logged at":"2023-08-22T17:03:46.058+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-22T17:03:46.080+0100","message":"pq: password authentication failed for user \"aymane\"","foo":"bar"}
+{"level":"info","logged at":"2023-08-22T17:03:46.081+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-22T17:03:46.104+0100","message":"pq: password authentication failed for user \"aymane\"","foo":"bar"}
+{"level":"info","logged at":"2023-08-22T17:03:46.104+0100","message":"logger construction succeeded","foo":"bar"}
+{"level":"error","logged at":"2023-08-22T17:03:46.130+0100","message":"pq: password authentication failed for user \"aymane\"","foo":"bar"}
+{"level":"error","logged at":"2023-08-22T17:03:46.134+0100","message":"pq: password authentication failed for user \"aymane\"","foo":"bar"}

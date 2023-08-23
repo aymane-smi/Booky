@@ -110,6 +110,7 @@ jobs:
       - name: Extract Metadata
         uses: docker/metadata-action@v4
         with:
+          images: aymanebel/booky
           tags: 
               type=semver,pattern={{raw}}
       - name: build and push

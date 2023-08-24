@@ -21,7 +21,7 @@ jobs:
         image: postgres
         env:
           POSTGRES_USER: ${{ secrets.PG_USER }}
-          POSTGRES_DB: book_go
+          POSTGRES_DB: booky_go
           POSTGRES_PASSWORD: ${{ secrets.PG_PASS }}
         ports:
           - 5432:5432

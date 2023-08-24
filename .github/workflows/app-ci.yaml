@@ -44,7 +44,7 @@ jobs:
       - name: Run migrations
         run: |
                 export PGPASSWORD=${{ secrets.PG_PASS }}
-                psql -h localhost -U ${{ secrets.PG_USER }} -a -f book_go.sql book_go
+                psql -h localhost -U ${{ secrets.PG_USER }} -a -f book_go.sql booky_go
       - name: Run Go Test with excluding controllers package
         env:
               DB_HOST: "localhost"

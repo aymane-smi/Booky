@@ -50,7 +50,7 @@ jobs:
               DB_HOST: "localhost"
               DB_PASS: ${{ secrets.PG_PASS }}
               DB_USER: ${{ secrets.PG_USER }}
-              DB_NAME: "booky"
+              DB_NAME: "booky_go"
         run: go test $(go list ./... | grep -v /controllers)
   release:
       needs: test

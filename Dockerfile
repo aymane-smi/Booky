@@ -13,6 +13,8 @@ RUN go mod download
 # Copy the rest of the application code
 COPY . .
 
+RUN cd utils && ls -la
+
 # Generate env variable for db credentiels we going to add default value just in case
 
 ENV DB_USER=root
@@ -27,17 +29,13 @@ ENV DB_NAME=booky
 ENV DB_PORT=5432
 
 # Build the application
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o booky .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /booky
 
-# Use a lightweight base image for the final image
-FROM alpine:latest
-
-# Copy the binary from the build image to the final image
-COPY --from=build /app/booky /usr/local/bin/booky
+RUN ls -la
 
 #Expose teh default port of the app 
 
 EXPOSE 8000
 
 # Run the application
-CMD ["booky"]
+CMD ["/booky"]

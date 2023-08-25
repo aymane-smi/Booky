@@ -21,7 +21,7 @@ jobs:
         image: postgres
         env:
           POSTGRES_USER: ${{ secrets.PG_USER }}
-          POSTGRES_DB: book_go
+          POSTGRES_DB: booky_go
           POSTGRES_PASSWORD: ${{ secrets.PG_PASS }}
         ports:
           - 5432:5432
@@ -44,8 +44,13 @@ jobs:
       - name: Run migrations
         run: |
                 export PGPASSWORD=${{ secrets.PG_PASS }}
-                psql -h localhost -U ${{ secrets.PG_USER }} -a -f book_go.sql book_go
+                psql -h localhost -U ${{ secrets.PG_USER }} -a -f book_go.sql booky_go
       - name: Run Go Test with excluding controllers package
+        env:
+              DB_HOST: "localhost"
+              DB_PASS: ${{ secrets.PG_PASS }}
+              DB_USER: ${{ secrets.PG_USER }}
+              DB_NAME: "booky_go"
         run: go test $(go list ./... | grep -v /controllers)
   release:
       needs: test
@@ -107,14 +112,10 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASS }}
-      # - name: Extract Metadata
-      #   uses: docker/metadata-action@v4
-      #   with:
-      #     images: aymanebel/booky
-      #     tags: 
-      #         type=semver,pattern={{version}}
       - name: build and push
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: aymanebel/booky:latest
+          tags: |
+                  aymanebel/booky:latest
+                  aymanebel/booky:${{env.RELEASE_VERSION}}

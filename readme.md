@@ -53,3 +53,17 @@ the monitoring system use **Prometheus** with 3 types of metrics:
  in order to make the logger work for both testing and other environment we can change ``WORK_MODE`` in `.env` file to be ```DEV``` or ```TEST``` in the following destination :
 - `/models/.env`
 - `/.env`
+
+### Load Balancing
+
+for load balancing Booky uses **Nginx** which is a famous proxy server in the market.
+
+the workflowof the load balancer is explained in the illustration above
+
+### Commands
+
+you can use `Makfile` to run, build, or stop project containers
+
+### Build & CICD
+
+in this project Booky use github action FOR CICD pipeline to test, build release and tags and finally push the project image to docker hub [you can get the official image here](https://hub.docker.com/r/aymanebel/booky).

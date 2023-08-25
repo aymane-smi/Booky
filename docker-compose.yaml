@@ -8,28 +8,26 @@ services:
   #     - "3000:3000"
   instance1:
     image: aymanebel/booky:latest
-    container_name: instance1
+    #container_name: instance1
     environment:
       - DB_USER=aymane
       - DB_PASS=aymane@123
       - DB_NAME=book_go
       - DB_HOST=postgres
-    ports:
-      - 8001:8000
     networks:
       - load
-  instance2:
-    image: aymanebel/booky:latest
-    container_name: instance2
-    environment:
-      - DB_USER=aymane
-      - DB_PASS=aymane@123
-      - DB_NAME=book_go
-      - DB_HOST=postgres
-    ports:
-      - 8002:8000
-    networks:
-      - load
+  # instance2:
+  #   image: aymanebel/booky:latest
+  #   container_name: instance2
+  #   environment:
+  #     - DB_USER=aymane
+  #     - DB_PASS=aymane@123
+  #     - DB_NAME=book_go
+  #     - DB_HOST=postgres
+  #   ports:
+  #     - 8002:8000
+  #   networks:
+  #     - load
   nginx:
     container_name: nginx
     image: nginx
